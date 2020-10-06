@@ -25,12 +25,12 @@ class HomePart extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             Text(
-              'Golden Tulip Holland Resort offers the kind of facilities and services that make travelling with children a breeze. The hotel',
+              'Golden Tulip Holland Resort offers the kind of facilities and services that make travelling with children a breeze. The hotel is geared towards the needs and requirements of all families, big and small. Our Hotel offers various activities for kids, along with a pool/slide.',
               style: TextStyle(fontSize: 16, fontFamily: "Sans Serif"),
               textAlign: TextAlign.left,
             ),
             Text(
-              
+              'Try our '
             )
           ],
         ),
