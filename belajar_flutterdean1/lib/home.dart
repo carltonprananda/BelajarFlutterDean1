@@ -1,3 +1,4 @@
+import 'package:belajar_flutterdean1/booking.dart';
 import 'package:flutter/material.dart';
 
 class HomePart extends StatelessWidget {
@@ -11,11 +12,20 @@ class HomePart extends StatelessWidget {
           title: Text('Hotel'),
           backgroundColor: Colors.blueAccent,
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              FloatingActionButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                mini: false,
+                onPressed: () {},
+                child: Icon(Icons.thumb_up),
+                
+              ),
               Image.network(
-                  "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/20021087-c9dd5ef476a9c7766ad7b24ebb347e30.jpeg?tr=q-40,c-at_max,w-740,h-500&_src=imagekit"),
+                  "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/20021087-c9dd5ef476a9c7766ad7b24ebb347e30.jpeg?tr=q-40,c-at_max,w-740,h-500&_src=imagekit \n"),
               Row(
                 children: <Widget>[
                   Image.network(
@@ -42,7 +52,10 @@ class HomePart extends StatelessWidget {
               ),
               Text(
                 'Welcome to Golden Tulip Holland Batu',
-                style: TextStyle(fontSize: 24, fontFamily: "Sans Serif"),
+                style: TextStyle(
+                    fontSize: 24,
+                    fontFamily: "Sans Serif",
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 'entertainments, it offers two food & beverafe venues, swimming pools, a spa, a fitness center, a kids playground and meeting room facilities which cater up to 2009 person \n',
@@ -58,6 +71,19 @@ class HomePart extends StatelessWidget {
                 'Try our tempting menu of drinks and light meals available 24 hours. When you feel the need of food and beverage, we are ready to serve you. Our business center offers computer use and internet services, ',
                 style: TextStyle(fontSize: 16, fontFamily: "Sans Serif"),
                 textAlign: TextAlign.left,
+              ),
+              FloatingActionButton(
+                heroTag: null,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                mini: false,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                    return BookingPart();
+                  }));
+                },
+                child: Icon(Icons.thumb_up),
               )
             ],
           ),
