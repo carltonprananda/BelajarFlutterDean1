@@ -6,6 +6,7 @@ class BookingPart extends StatefulWidget {
 }
 
 class BookingPartState extends State<BookingPart> {
+
   final formKey = GlobalKey<FormState>();
   TextEditingController namecontroller = TextEditingController(text: "");
   TextEditingController emailcontroller = TextEditingController(text: "");
@@ -46,6 +47,8 @@ class BookingPartState extends State<BookingPart> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(brightness: Brightness.dark),
         home: Scaffold(
       appBar: AppBar(
         title: Text("Booking Part"),

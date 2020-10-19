@@ -6,8 +6,14 @@ class HomePart extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hotel App',
-      theme: ThemeData(brightness: Brightness.light),
+      theme: ThemeData(
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       home: Scaffold(
+        
         appBar: AppBar(
           title: Text('Mission 1'),
           backgroundColor: Colors.blueAccent,
@@ -16,6 +22,8 @@ class HomePart extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              
+
               Stack(children: <Widget>[
                 Image.network(
                     "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/20021087-c9dd5ef476a9c7766ad7b24ebb347e30.jpeg?tr=q-40,c-at_max,w-740,h-500&_src=imagekit \n"),
@@ -70,7 +78,6 @@ class HomePart extends StatelessWidget {
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              
               SingleChildScrollView(
                 child: Container(
                   child: Column(
@@ -97,7 +104,6 @@ class HomePart extends StatelessWidget {
                   ),
                 ),
               ),
-              
               Stack(children: <Widget>[
                 SingleChildScrollView(
                   child: Column(children: <Widget>[
