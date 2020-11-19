@@ -1,6 +1,8 @@
 part of 'textlabel_bloc.dart';
 
 @immutable
-abstract class TextlabelState {}
+class TextlabelState {
+  final String value;
 
-class TextlabelInitial extends TextlabelState {}
+  TextlabelState(this.value);
+}

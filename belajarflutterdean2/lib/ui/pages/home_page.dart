@@ -2,12 +2,11 @@ part of 'pages.dart';
 
 class HomePage extends StatelessWidget {
   final ctrlName = TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
+      appBar: AppBar(
         title: Text("Dengan Bloc"),
       ),
       body: Container(
@@ -15,8 +14,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Hello",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24)),
+            BlocBuilder<TextlabelBloc, TextlabelState>(
+              builder: (context, changeTextLabelState) 
+                => Text(changeTextLabelState.value.toString(),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 24)),
+            ),
             SizedBox(
               height: 24,
             ),
@@ -33,10 +36,11 @@ class HomePage extends StatelessWidget {
             RaisedButton.icon(
               textColor: Colors.white,
               color: Colors.blue[700],
-              onPressed: (){
-                
+              onPressed: () {
+                context.bloc<TextlabelBloc>().add(ChangeTextLabel(ctrlName.text));
               },
-              icon: Icon(Icons.add_box), label: Text("Submit"),
+              icon: Icon(Icons.add_box),
+              label: Text("Submit"),
             )
           ],
         ),
