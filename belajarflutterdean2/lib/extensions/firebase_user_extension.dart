@@ -5,7 +5,7 @@ extension FirebaseUserExtension on User{
 
   
 
-Users convertToUser(String name) => Users(this.uid, this.email, name: name);
+Users convertToUser({String name}) => Users(this.uid, this.email, name: name);
 //Users convertToUser({String name = "No Name"}) => Users(this.uid, this.email, name: name);
 
 }
