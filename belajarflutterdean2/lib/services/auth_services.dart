@@ -1,12 +1,9 @@
 part of 'services.dart';
 
-
-
-
 class AuthServices {
   static FirebaseAuth auth = FirebaseAuth.instance;
 
-  static Future<String> signUp(String email, String password, String name) async {
+  static Future<String> signUp(String name, String email, String password) async {
     await Firebase.initializeApp();
     String msg = "";
     try {

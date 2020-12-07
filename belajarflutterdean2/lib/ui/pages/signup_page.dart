@@ -6,7 +6,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
- 
   final ctrlName = TextEditingController();
   final ctrlEmail = TextEditingController();
   final ctrlPassword = TextEditingController();
@@ -22,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
         theme: ThemeData(
             brightness: Brightness.light, primaryColor: Colors.red[600]),
         darkTheme: ThemeData(
@@ -62,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             obscureText: true,
                             decoration: InputDecoration(
                                 prefixIcon: Icon(Icons.lock_clock),
-                                labelText: 'Passord',
+                                labelText: 'Password',
                                 hintText: "Your Password Please",
                                 border: OutlineInputBorder())),
                         SizedBox(height: 40),
@@ -79,7 +77,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                   textColor: Colors.yellow,
                                   fontSize: 16.0);
                             } else {
-                              String result = await AuthServices.signUp(ctrlName.text, ctrlEmail.text, ctrlPassword.text);
+                              String result = await AuthServices.signUp(
+                                  ctrlName.text,
+                                  ctrlEmail.text,
+                                  ctrlPassword.text);
                               Fluttertoast.showToast(
                                   msg: result,
                                   toastLength: Toast.LENGTH_SHORT,
@@ -95,18 +96,18 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.blue,
                         ),
                         SizedBox(height: 25),
-                        RichText(text: TextSpan(
-                          text: 'Already registered? Sign in.',
-                          style: TextStyle(color: Colors.blue),
-                          recognizer: TapGestureRecognizer()
-                          ..onTap = (){
-                            Navigator.pushReplacement(context, 
-                            MaterialPageRoute(builder: (context) {
-                              return SignInPage();
-                            }));
-                          }
-                        ))
-                                              ])
+                        RichText(
+                            text: TextSpan(
+                                text: 'Already registered? Sign in.',
+                                style: TextStyle(color: Colors.blue),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SignInPage();
+                                    }));
+                                  }))
+                      ])
                 ],
               )),
         ));

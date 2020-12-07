@@ -55,7 +55,7 @@ class _SignInPageState extends State<SignInPage> {
                                 border: OutlineInputBorder())),
                         SizedBox(height: 40),
                         RaisedButton.icon(
-                          onPressed: () async{
+                          onPressed: () async {
                             if (ctrlEmail.text == "" ||
                                 ctrlPassword.text == "") {
                               Fluttertoast.showToast(
@@ -66,29 +66,28 @@ class _SignInPageState extends State<SignInPage> {
                                   textColor: Colors.yellow,
                                   fontSize: 16.0);
                             } else {
-                              String result = await AuthServices.signIn(ctrlEmail.text, ctrlPassword.text);
-                              if(result=="success"){
-                              Fluttertoast.showToast(
-                                  msg: "Sign in success",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER_RIGHT,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.yellow,
-                                  fontSize: 16.0);
-                                  Navigator.pushReplacement(context,
-                                    MaterialPageRoute(builder: 
-                                      (context)
-                                      {return MainMenu();
-                                      }));
-                              }else{
+                              String result = await AuthServices.signIn(
+                                  ctrlEmail.text, ctrlPassword.text);
+                              if (result == "success") {
                                 Fluttertoast.showToast(
-                                  msg: result,
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER_RIGHT,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.yellow,
-                                  fontSize: 16.0);
-                                
+                                    msg: "Sign in success",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER_RIGHT,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.yellow,
+                                    fontSize: 16.0);
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return MainMenu();
+                                }));
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: result,
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER_RIGHT,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.yellow,
+                                    fontSize: 16.0);
                               }
                             }
                           },

@@ -1,4 +1,4 @@
-/*part of 'services.dart';
+part of 'services.dart';
 
 class UserServices {
   static CollectionReference userCollection = FirebaseFirestore.instance.collection("users");
@@ -13,4 +13,4 @@ class UserServices {
     });
   }
 
-} */
+}
