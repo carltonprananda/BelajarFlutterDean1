@@ -36,6 +36,10 @@ class _MainMenuState extends State<MainMenu> {
              icon: Icon(Icons.add_circle_outline_rounded),
              label: 'My Data'),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.blue,
+        onTap: _onItemtapped,
           ),
     );
   }

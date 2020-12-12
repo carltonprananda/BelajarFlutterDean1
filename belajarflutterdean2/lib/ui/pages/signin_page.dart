@@ -8,6 +8,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final ctrlEmail = TextEditingController();
   final ctrlPassword = TextEditingController();
+  bool isLoading = true;
 
   @override
   void dispose() {
@@ -29,88 +30,110 @@ class _SignInPageState extends State<SignInPage> {
           appBar: AppBar(
             title: Text("Sign in"),
           ),
-          body: Container(
-              margin: EdgeInsets.all(10),
-              child: ListView(
-                children: <Widget>[
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: 40),
-                        TextFormField(
-                            controller: ctrlEmail,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.mail_sharp),
-                                labelText: 'Email',
-                                hintText: "Your Email Please",
-                                border: OutlineInputBorder())),
-                        SizedBox(height: 40),
-                        TextFormField(
-                            controller: ctrlPassword,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.lock_clock),
-                                labelText: 'Password',
-                                hintText: "Your Password Please",
-                                border: OutlineInputBorder())),
-                        SizedBox(height: 40),
-                        RaisedButton.icon(
-                          onPressed: () async {
-                            if (ctrlEmail.text == "" ||
-                                ctrlPassword.text == "") {
-                              Fluttertoast.showToast(
-                                  msg: "Please fill all fields :-)",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER_RIGHT,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.yellow,
-                                  fontSize: 16.0);
-                            } else {
-                              String result = await AuthServices.signIn(
-                                  ctrlEmail.text, ctrlPassword.text);
-                              if (result == "success") {
+          body: Stack(children: [
+            Container(
+                margin: EdgeInsets.all(10),
+                child: ListView(
+                  children: <Widget>[
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: 40),
+                          TextFormField(
+                              controller: ctrlEmail,
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.mail_sharp),
+                                  labelText: 'Email',
+                                  hintText: "Your Email Please",
+                                  border: OutlineInputBorder())),
+                          SizedBox(height: 40),
+                          TextFormField(
+                              controller: ctrlPassword,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.lock_clock),
+                                  labelText: 'Password',
+                                  hintText: "Your Password Please",
+                                  border: OutlineInputBorder())),
+                          SizedBox(height: 40),
+                          RaisedButton.icon(
+                            onPressed: () async {
+                              if (ctrlEmail.text == "" ||
+                                  ctrlPassword.text == "") {
                                 Fluttertoast.showToast(
-                                    msg: "Sign in success",
+                                    msg: "Please fill all fields :-)",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.CENTER_RIGHT,
                                     backgroundColor: Colors.red,
                                     textColor: Colors.yellow,
                                     fontSize: 16.0);
-                                Navigator.pushReplacement(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return MainMenu();
-                                }));
                               } else {
-                                Fluttertoast.showToast(
-                                    msg: result,
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER_RIGHT,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.yellow,
-                                    fontSize: 16.0);
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                String result = await AuthServices.signIn(
+                                    ctrlEmail.text, ctrlPassword.text);
+                                if (result == "success") {
+                                  Fluttertoast.showToast(
+                                      msg: "Sign in success",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER_RIGHT,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.yellow,
+                                      fontSize: 16.0);
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return MainMenu();
+                                  }));
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: result,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER_RIGHT,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.yellow,
+                                      fontSize: 16.0);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                }
                               }
-                            }
-                          },
-                          icon: Icon(Icons.upload_sharp),
-                          label: Text("Sign in"),
-                          textColor: Colors.white,
-                          color: Colors.blue,
-                        ),
-                        SizedBox(height: 25),
-                        RichText(
-                            text: TextSpan(
-                                text: 'Not registered? Sign Up.',
-                                style: TextStyle(color: Colors.blue),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return SignUpPage();
-                                    }));
-                                  }))
-                      ])
-                ],
-              )),
+                            },
+                            icon: Icon(Icons.upload_sharp),
+                            label: Text("Sign in"),
+                            textColor: Colors.white,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(height: 25),
+                          RichText(
+                              text: TextSpan(
+                                  text: 'Not registered? Sign Up.',
+                                  style: TextStyle(color: Colors.blue),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return SignUpPage();
+                                      }));
+                                    }))
+                        ])
+                  ],
+                )),
+            isLoading==true ?
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: SpinKitFadingCircle(
+                color: Colors.red,
+                size: 50,
+              ),
+            )
+            :
+              Container()
+          ]),
         ));
   }
 }
