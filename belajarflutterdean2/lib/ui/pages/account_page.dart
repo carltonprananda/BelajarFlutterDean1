@@ -9,6 +9,7 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +18,7 @@ class _AccountPageState extends State<AccountPage> {
             centerTitle: true,
             leading: Container()),
         body: Stack(children: [
+          
           Container(
               padding: EdgeInsets.only(bottom: 20),
               child: Align(
@@ -60,18 +62,6 @@ class _AccountPageState extends State<AccountPage> {
                           });
                       setState(() {
                         isLoading = true;
-                      });
-                      await AuthServices.signOut().then((value) {
-                        if (value) {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return SignInPage();
-                          }));
-                        } else {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
                       });
                     },
                     padding: EdgeInsets.all(12),

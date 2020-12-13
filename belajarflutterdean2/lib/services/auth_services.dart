@@ -2,6 +2,8 @@ part of 'services.dart';
 
 class AuthServices {
   static FirebaseAuth auth = FirebaseAuth.instance;
+  static final firestore = FirebaseFirestore.instance; 
+  final CollectionReference users = firestore.collection('user');
 
   static Future<String> signUp(
       String name, String email, String password) async {
@@ -41,8 +43,12 @@ class AuthServices {
     await auth.signOut().whenComplete(
           () => result = true,
         );
-        return result;
+    return result;
   }
 
-  
+  static getUsername() async {
+    final snapShot = await FirebaseFirestore.instance.collection('users').doc('uid').get();
+
+
+}
 }
